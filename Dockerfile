@@ -1,19 +1,22 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.8-slim
+# Inherit python image
+FROM python:3.6-slim
 
-RUN mkdir /app
-WORKDIR /app
+# Set up directories
+RUN mkdir /application
+WORKDIR /application
 
+# Copy python dependencies and install these
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-
+# Copy the rest of the applicationssd
 COPY . .
 
+# Environment variables
 ENV PYTHONUNBUFFERED 1
 
+# EXPOSE port 8000 to allow communication to/from server
 EXPOSE 8001
 STOPSIGNAL SIGINT
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-ENTRYPOINT [ "python" ]
+ENTRYPOINT ["python"]
 CMD ["flask_app.py"]
