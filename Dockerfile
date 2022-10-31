@@ -16,8 +16,8 @@ RUN python -m pip install -r requirements.txt
 
 RUN mkdir /app
 WORKDIR /app
-COPY . /app
+COPY . .
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 ENTRYPOINT [ "python" ]
-CMD ["app.py"]
+CMD ["flask_app.py"]
